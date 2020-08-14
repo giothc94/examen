@@ -23,7 +23,7 @@ UsersApi(app);
 // error handlers
 
 app.use((err, req, res, next) => {
-  res.json({
+  res.status(err.code).json({
     statusCode: err.code || 500,
     message: err,
   });
