@@ -16,7 +16,13 @@ const id = Joi.object({
 });
 
 const userCreate = Joi.object({
-  ci: Joi.string().empty().min(10).max(13).trim().pattern(/^[0-9]+$/).required(),
+  ci: Joi.string()
+    .empty()
+    .min(10)
+    .max(13)
+    .trim()
+    .pattern(/^[0-9]+$/)
+    .required(),
   firstName: Joi.string().empty().min(5).max(50).trim().lowercase().required(),
   lastName: Joi.string().empty().min(5).max(50).trim().lowercase().required(),
   email: Joi.string().empty().email().trim().required(),
@@ -35,12 +41,18 @@ const userUpdate = Joi.object({
   firstName: Joi.string().empty().min(5).max(50).trim().lowercase().optional(),
   lastName: Joi.string().empty().min(5).max(50).trim().lowercase().optional(),
   email: Joi.string().empty().email().trim().optional(),
-  tipo: Joi.string().max(100).trim().invalid("super-root").optional(),
+  tipo: Joi.string()
+    .max(100)
+    .trim()
+    .valid("administrador")
+    .valid("estudiante")
+    .valid("bibliotecario")
+    .required(),
   clave: Joi.string().min(8).optional(),
 });
 
 module.exports = {
   id,
   userCreate,
-  userUpdate
+  userUpdate,
 };
